@@ -3,18 +3,20 @@ import tensorflow as tf
 from PIL import Image
 import base64
 import io
+import os
 
 
-def load_model(model_path='mnist_model_final.keras'):
-    """Loads the pre-trained MNIST model.
-    """
+def load_model():
+    """Loads the pre-trained MNIST model dynamically."""
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(BASE_DIR, "mnist_model_final.keras")
+
     try:
         model = tf.keras.models.load_model(model_path)
         print("Model loaded successfully.")
         return model
     except Exception as e:
         raise ValueError(f"Error loading model: {e}")
-
 
 # def preprocess_image(base64_image):
 #     """
